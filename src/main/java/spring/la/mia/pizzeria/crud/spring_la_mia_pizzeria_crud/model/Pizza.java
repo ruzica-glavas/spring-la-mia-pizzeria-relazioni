@@ -39,6 +39,15 @@ public class Pizza {
     private List<Offerte> offerte;
 
 
+    public List<Offerte> getOfferte() {
+        return this.offerte;
+    }
+
+    public void setOfferte(List<Offerte> offerte) {
+        this.offerte = offerte;
+    }
+
+
     public Integer getId() {
         return this.id;
     }
