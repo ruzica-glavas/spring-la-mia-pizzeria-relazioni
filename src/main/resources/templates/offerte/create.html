@@ -19,7 +19,7 @@
 
                     <div class="mb-2">
                         <label for="title" class="form-label">Titolo dell'offerta</label>
-                        <input type="text" class="form-control" id="name" th:field="*{title}" th:errorClass="is-invalid" minlength="2"  maxlength="10" placeholder="es. Mascarpone">
+                        <input type="text" class="form-control" id="title" th:field="*{title}" th:errorClass="is-invalid" minlength="2"  maxlength="30" placeholder="es. Mascarpone">
                         <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
                             <ul>
                                 <li th:each="err:${#fields.errors('title')}" th:text="${err}"></li>
