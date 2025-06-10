@@ -36,14 +36,14 @@ public class Pizza {
     private Float price;
 
     @OneToMany(mappedBy = "pizza")
-    private List<Offerte> offerte;
+    private List<Offerta> offerte;
 
 
-    public List<Offerte> getOfferte() {
+    public List<Offerta> getOfferte() {
         return this.offerte;
     }
 
-    public void setOfferte(List<Offerte> offerte) {
+    public void setOfferte(List<Offerta> offerte) {
         this.offerte = offerte;
     }
 

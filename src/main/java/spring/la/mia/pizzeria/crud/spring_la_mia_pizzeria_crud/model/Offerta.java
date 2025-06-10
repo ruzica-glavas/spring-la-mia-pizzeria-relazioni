@@ -9,24 +9,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
+//import jakarta.validation.constraints.Past;
+//import jakarta.validation.constraints.PastOrPresent;
 
 @Entity
 @Table(name="offerte")
-public class Offerte {
+public class Offerta {
+
+
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull(message = "You can't have an offer without a offer date")
-    @PastOrPresent(message = "The offer date cannot be in the future")
+    @FutureOrPresent(message = "The offer date cannot be in the past")
     private LocalDate offerDate;
 
     @NotNull(message = "The offer must have an end date")
-    @PastOrPresent(message = "The end date cannot be in the future")
+    @FutureOrPresent(message = "The end of the offer cannot be in the past")
     private LocalDate endDate;
 
     @NotBlank(message = "Title must not be null nor empty or blank")
@@ -35,6 +39,14 @@ public class Offerte {
     @ManyToOne
     @JoinColumn(name = "pizza_id", nullable = false)
     private Pizza pizza;
+
+    public Pizza getPizza() {
+        return this.pizza;
+    }
+
+    public void setPizza(Pizza pizza) {
+        this.pizza = pizza;
+    }
 
 
     public Integer getId() {
