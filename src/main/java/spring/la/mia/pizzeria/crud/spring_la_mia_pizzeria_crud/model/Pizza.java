@@ -1,10 +1,13 @@
 package spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -31,6 +34,9 @@ public class Pizza {
     @NotNull
     @Min(value=0, message = "Prize can not be negative")
     private Float price;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<Offerte> offerte;
 
 
     public Integer getId() {
