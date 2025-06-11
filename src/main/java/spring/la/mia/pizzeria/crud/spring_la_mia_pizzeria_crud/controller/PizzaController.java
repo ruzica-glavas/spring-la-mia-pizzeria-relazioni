@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model.Offerta;
 import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model.Pizza;
+//import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.repository.OffertaRepository;
 import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 import org.springframework.ui.Model;
@@ -29,6 +30,9 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository pizzaRepository;
+
+    // @Autowired
+    // private OffertaRepository offertaRepository;
 
     @GetMapping
     public String index(@RequestParam(name="name", required = false) String name,  Model model) {
@@ -91,7 +95,16 @@ public class PizzaController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id){
-        pizzaRepository.deleteById(id);
+
+        Pizza pizza = pizzaRepository.findById(id).get();
+
+        // for (Offerta offertaToDelete: pizza.getOfferte()) {
+        //     offertaRepository.delete(offertaToDelete);
+        // } Questo pezzo di codice non é più necessario se si usa il cascade nella @OneToMany in Pizza.java
+
+
+        //pizzaRepository.deleteById(id); --> La query per cercare il libro e cancellarlo è già stato fatto quindi posso cancellarlo in questo modo:
+        pizzaRepository.delete(pizza);
 
         return "redirect:/pizzas";
     }

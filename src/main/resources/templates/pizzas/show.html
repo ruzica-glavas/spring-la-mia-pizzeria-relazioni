@@ -32,18 +32,30 @@
                         <p class="card-text" th:text="'Data di inizio: ' + ${offerta.offerDate}"></p>
                         <p class="card-text" th:text="'Data di fine: '+ ${offerta.endDate}"></p>
                     </div>
-                    <a class="btn btn-outline-info" th:href="@{/offerte/edit/{id}(id=${offerta.id})}" role="button">Modifica</a>    
+                    <a class="btn btn-outline-info" th:href="@{/offerte/edit/{id}(id=${offerta.id})}" role="button">Modifica</a>
+   
                 </div>
             </div>
+
+            <div class="col-12 text-center mb-2">
+                <a class="btn btn-outline-success  w-30" th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" role="button">Crea la tua offerta speciale</a> 
+            </div>
+            
+
         </div>
 
         <div class="row mt-4" th:unless="${pizza.offerte.size()>0}">
             <div class="alert alert-warning" role="alert">
                 <h4>Al momento non ci sono offerte disponibili!</h4>
             </div>
+            <div class="col-12 text-center mb-2">
+                <a class="btn btn-outline-success  w-30" th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" role="button">Crea la tua offerta speciale</a> 
+            </div>
         </div>
 
     </main>
+
+
 
     <div th:replace="~{fragments/resources :: goBackButton}"></div>
 

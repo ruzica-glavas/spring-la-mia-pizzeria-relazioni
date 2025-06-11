@@ -2,6 +2,7 @@ package spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,7 +36,7 @@ public class Pizza {
     @Min(value=0, message = "Prize can not be negative")
     private Float price;
 
-    @OneToMany(mappedBy = "pizza")
+    @OneToMany(mappedBy = "pizza", cascade = {CascadeType.REMOVE})
     private List<Offerta> offerte;
 
 

@@ -34,7 +34,7 @@
 
                 <div class="card-footer text-center">
                     <div class="d-flex justify-content-center gap-2 my-2">
-                        <a class="btn btn-outline-success" th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" role="button">Offerte</a>
+                        <a class="btn btn-outline-success" th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" role="button">offerta</a>
                         <a class="btn btn-outline-primary" th:href="@{/pizzas/{id}(id=${pizza.id})}" role="button">Dettaglio</a>
                         <a class="btn btn-outline-info" th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" role="button">Modifica</a>
                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:attr="data-bs-target='#delete-modal-' + ${pizza.id}">Elimina
