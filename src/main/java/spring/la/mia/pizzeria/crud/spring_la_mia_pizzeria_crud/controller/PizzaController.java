@@ -102,7 +102,7 @@ public class PizzaController {
         offerta.setPizza(pizzaRepository.findById(id).get());
 
         model.addAttribute("offerta", offerta);
-        return "offerte/create";
+        return "offerte/create-or-edit";
     }
     
   
