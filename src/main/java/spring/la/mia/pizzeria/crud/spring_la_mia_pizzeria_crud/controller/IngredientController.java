@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model.Ingredient;
+import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model.Pizza;
 import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.repository.IngredientRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -66,7 +67,6 @@ public class IngredientController {
 
     @PostMapping("edit/{id}")
     public String update(@Valid @ModelAttribute("ingredient") Ingredient formIngredient, BindingResult bindingResult, Model model){
-        //model.addAttribute("edit", true);
         if(bindingResult.hasErrors()){
             return "ingredients/create-or-edit";
         }
@@ -76,6 +76,18 @@ public class IngredientController {
         return "redirect:/ingredients";
     }
 
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        Ingredient ingredient = ingredientRepository.findById(id).get();
+
+        for(Pizza pizzaToDelete : ingredient.getPizzas()){
+            pizzaToDelete.getIngredients().remove(ingredient);
+        }
+
+        ingredientRepository.delete(ingredient);
+
+        return "redirect:/ingredients";
+    }
 
     
     
