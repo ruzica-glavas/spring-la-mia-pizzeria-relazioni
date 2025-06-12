@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/resources :: headTags}">
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('ingredients')}"></nav>
+    <!-- <p th:text="${pizzas}"></p> -->
+
+    
+
+<div class="container mt-4">
+    <h1>Ingredients</h1>
+
+</div>
+
+<div class="text-center my-2 p-4">
+    <a class="btn btn-outline-danger" th:href="@{/pizzas}" role="button">Torna all'inizio della pagina</a>
+</div>   
+
+
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+</body>
+</html>
