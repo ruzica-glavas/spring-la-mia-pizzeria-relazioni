@@ -1,13 +1,17 @@
 package spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -36,9 +40,27 @@ public class Pizza {
     @Min(value=0, message = "Prize can not be negative")
     private Float price;
 
+    //Offerta
     @OneToMany(mappedBy = "pizza", cascade = {CascadeType.REMOVE})
     private List<Offerta> offerte;
 
+    //Ingredient
+    @ManyToMany
+    @JoinTable(
+        name = "ingredient_pizza",
+        joinColumns = @JoinColumn(name="pizza_id"),
+        inverseJoinColumns = @JoinColumn(name="ingredient_id")
+    )
+
+    private Set<Ingredient> ingredients;
+
+    public Set<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public List<Offerta> getOfferte() {
         return this.offerte;
