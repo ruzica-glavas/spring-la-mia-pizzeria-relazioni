@@ -66,9 +66,7 @@
 
 </div>
 
-<div class="text-center my-2 p-4">
-    <a class="btn btn-outline-danger" th:href="@{/pizzas}" role="button">Torna alla pagina con tutte le pizze</a>
-</div>   
+ <div th:replace="~{fragments/resources :: goBackButton}"></div>
 
 
     <div th:replace="~{fragments/resources :: scripts}"></div>
