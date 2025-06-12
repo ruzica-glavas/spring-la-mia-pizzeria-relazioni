@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model.Offerta;
 import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.model.Pizza;
+import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.repository.IngredientRepository;
 //import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.repository.OffertaRepository;
 import spring.la.mia.pizzeria.crud.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
@@ -30,6 +31,9 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository pizzaRepository;
+
+    @Autowired
+    private IngredientRepository ingredientRepository;
 
     // @Autowired
     // private OffertaRepository offertaRepository;
@@ -61,12 +65,13 @@ public class PizzaController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "/pizzas/create";
     }
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         if(bindingResult.hasErrors()){
             return "pizzas/create";
         }
@@ -80,11 +85,13 @@ public class PizzaController {
     public String edit(@PathVariable("id") Integer id, Model model) {
 
         model.addAttribute("pizza", pizzaRepository.findById(id).get());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "/pizzas/edit";
     }
 
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         if(bindingResult.hasErrors()){
             return"/pizzas/edit";
         }
